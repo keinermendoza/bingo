@@ -5,7 +5,7 @@ from flask import Flask, request, render_template, redirect, url_for, send_file,
 from flask_session import Session
 from werkzeug.utils import secure_filename
 # personal
-from to_pdf import create_bingo_deck_pdf
+from pdf import print_bingo_deck
 
 app = Flask(__name__)
 
