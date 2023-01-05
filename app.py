@@ -55,14 +55,17 @@ def upload_file():
         else:
             flash("Unsoported file")
             return redirect(url_for("index"))
+
 @app.route("/create")
 async def create():
     # https://stackoverflow.com/questions/29643352/converting-hex-to-rgb-value-in-python
-    h = request.args.get("fill_color").lstrip('#')
+    # h = request.args.get("fill_color").lstrip('#')
+    # tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
     
     # creating a pdf with the amount of bingo cards solicited by the client
-    await create_bingo_deck_pdf(request.args.get("quantity"), tuple(int(h[i:i+2], 16) for i in (0, 2, 4)), "static/"+ session["filename"])
+    await print_bingo_deck(n=request.args.get("quantity"), img="static/"+ session["filename"])
 
     # downloading the pdf
-    return send_file("deck.pdf", as_attachment=True)
+    # the name must be the same defined in pdf.py
+    return send_file("bingo_deck.pdf", as_attachment=True)
     

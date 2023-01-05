@@ -3,7 +3,7 @@ from card import Bingo
 import PIL
 
 class PDF(FPDF):
-    def bingo_card(self, bingo_matriz, card_id, max_id, img=None):
+    def bingo_card(self, bingo_matriz, card_id, max_id, background_color=None, img=None):
         """
         :param max_id: the id of the last card inside the bingo object
         :type max_id: int
@@ -66,19 +66,25 @@ class PDF(FPDF):
             self.add_page()
 
 
-async  def print_bingo_deck(n):
+async def print_bingo_deck(n, background_color=None, img=None):
     """ 
     crate a pdf file with n quantity of bingo cards
     :param n: number of bingo cards to print
 
     """
+
+    try:
+        n = int(n)
+    except ValueError:
+        return False
     # setting pdf
     pdf = PDF()
     pdf.add_page()
     pdf.set_font("helvetica", "B", 16)
 
     # creating a set of Card object using Bingo init
-    bingo = Bingo(9)
+    bingo = Bingo(n)
     for card in bingo.deck:
-        pdf.bingo_card(card.matriz, card.id, bingo.times, "car.jpg" )
+        pdf.bingo_card(card.matriz, card.id, bingo.times, background_color, img)
     pdf.output("bingo_deck.pdf")
+    return True
