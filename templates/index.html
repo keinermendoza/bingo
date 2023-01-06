@@ -1,15 +1,12 @@
-"layout.html" %}
+{% extends "layout.html" %}
 
 {% block main %}
 
-<form action="/create" method="get">
+<form action="/create" method="post" enctype="multipart/form-data">
     <input type="number" name="quantity" id="">
+    <input type="file" name="file" id="">
 
     <input type="submit" value="Create Bingo Deck">
-</form>
-<br>
-<form action="/upload_file" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" id="">
-    <input type="submit" value="Submit File">
+    
 </form>
 {% endblock %}
