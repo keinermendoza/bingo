@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 # personal
 from pdf import print_bingo_deck
 from validation import allowed_image
+from req import get_images, get_one_image
 
 app = Flask(__name__)
 
@@ -27,31 +28,50 @@ Session(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    """Introduction page"""    
-    return render_template("index.html")
+    """Introduction page"""
+    list_img = get_images()
+    return render_template("index.html", list_img=list_img)
 
 
 @app.route("/create", methods=["POST"])
 async def create():
 
 
-    # check if the post request has the file part
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(url_for("index"))
+    # # check if the post request has the file part
+    # if 'file' not in request.files:
+    #     flash('No file part')
+    #     return redirect(url_for("index"))
 
     file = request.files['file']
         
     # If the user does not select a file, the browser submits an
     # empty file without a filename.
-    if file.filename == '':
-        flash('No selected file')
-        
-        # REVISAR asi parece que puedo volver a la direccion que me envio aqui
+
+    ### FIRST CHECKCING IF USER NOT UPLOAD A FILE
+
+    if file.filename == "":
+
+        ### CHECKING IF USER NOT SELECT AN IMAGE
+        if request.form.get("url_image_selected") == "":
+            ## RETURNING THE LAST VIEW
+            return redirect(request.url)
+
+        ## if user pick up an image
+        else:
+            fold = tempfile.TemporaryDirectory()
+            url_img = request.form.get("url_image_selected")
+            
+            path_temp_img = get_one_image(url_img=url_img, path_folder=fold.name)
+
+            await print_bingo_deck(n=request.form.get("quantity"), img=path_temp_img)
+            return send_file("bingo_deck.pdf", as_attachment=True)
+
+    
+    elif not file or not allowed_image(file.filename):
+        ## RETURNING THE LAST VIEW
         return redirect(request.url)
         
-    if file and allowed_image(file.filename):
-
+    else:
         # creating and temporal folder
 
         fold = tempfile.TemporaryDirectory()

@@ -37,7 +37,7 @@ class PDF(FPDF):
 
             # inserting image 
             self.image(img, h=col_height*6, w=col_width*5)
-
+            
             # resoring the before position
 
             self.x = x
@@ -77,6 +77,7 @@ async def print_bingo_deck(n, background_color=None, img=None):
         n = int(n)
     except ValueError:
         return False
+        
     # setting pdf
     pdf = PDF()
     pdf.add_page()
