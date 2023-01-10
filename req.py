@@ -17,7 +17,7 @@ def get_images(search='river'):
     json_response = response.json()
     list_photos = json_response["photos"]
 
-    return [photo["src"]["portrait"] for photo in list_photos]
+    return [photo["src"]["medium"] for photo in list_photos]
     
     
 def get_one_image(url_img, path_folder):
@@ -33,16 +33,19 @@ def get_one_image(url_img, path_folder):
         # path of file
         return  new_path_image
 
+# def main(search='river'):
+#     url_base = "https://api.pexels.com/v1/search"
+#     headers = {
+#         'Authorization': key,
+#     }
 
+#     params = {
+#         'query': search,
+#     }
 
-
-
-    # print("ready")
-
-    #print(json.dumps(response.json(), indent=4))
-
+#     response = requests.get(url_base, params=params, headers=headers)
     
-# def main():
-#     get_images()
-# if __name__=="__main__":
-#     main()
+
+#     print(json.dumps(response.json(), indent=4))
+# main()
+
