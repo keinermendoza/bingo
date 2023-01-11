@@ -10,9 +10,9 @@
     <input type="hidden" name="url_image_selected" id="url_img_selected" value="">    
 </form>
 <br>
-<div id="big_container">
-    <div id="demo_card_container" class="container-fluid text-center">
-        <div id="table_container">
+<div class="flex_container">
+    <div id="demo_card_container" class="flex_container width_30">
+        <div class="width_70">
         <table class="table">
             <thead>
                 <tr>
@@ -62,12 +62,12 @@
             </tbody>
         </table>
         </div>
-        <div id="card_cuztom">
+        <div class="width_30" id="card_cuztom">
             <h6>Options</h6>
         </div>
     </div>
     
-    <div id="img_container" class="container-fluid text-center">
+    <div id="img_container" class="flex_container width_70">
         {% for img in list_img %}
         <img
             src="{{img}}"

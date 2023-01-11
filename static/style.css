@@ -1,39 +1,39 @@
 .imagen {
     
-    height: 60vh;
-    min-height: 18rem;
+    width: 33%;
+    min-width: 15rem;
+    
     border-style: solid;
-    border-width: 1rem;
+    border-width: 0.5rem;
     border-color: white;
-    transition-property: border-color, padding;
+    transition-property: border-color;
     transition-duration: 1s;
-}
+}s
 
 .imagen:hover {
     border-color: #af34ff;
     
 }
 
-#big_container, #demo_card_container, #img_container {
-    display: flex;
-    
+.flex_container {
+    display: flex;   
+}
+.width_70 {
+    width: 70%;
+}
+.width_30 {
+    width: 30%;
 }
 
 #demo_card_container {
-    width: 30%;
     background-color: #af34ff;
 }
 #card_cuztom{
-    width:30%;
     background-color: blue;
 }
-#table_container {
-    width: 70%;
 
-}
 #img_container {
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    width: 70%;
     background-color: green;
 }
