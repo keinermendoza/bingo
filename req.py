@@ -17,7 +17,7 @@ def get_images(search='river'):
     json_response = response.json()
     list_photos = json_response["photos"]
 
-    return [photo["src"]["medium"] for photo in list_photos]
+    return [photo["src"]["portrait"] for photo in list_photos]
     
     
 def get_one_image(url_img, path_folder):
