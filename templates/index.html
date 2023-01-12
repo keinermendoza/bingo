@@ -84,13 +84,40 @@
 
 {% block script %}
 <script>
+    const input_hide = document.getElementById("url_img_selected")
     list_img = document.getElementsByClassName("imagen");
     for (var i = 0; i < list_img.length; i++)
     {
         list_img[i].addEventListener("click", function()
-        {
-            document.getElementById("url_img_selected").value = this.src;
-            alert(this.src)
+        { 
+            // si el input no ya tiene el valor borrar el contenido 
+            if (input_hide.value == this.src) {
+
+                this.classList.remove("active")
+                input_hide.value = ""
+
+                console.log("the value of input_ hide is")
+                console.log(input_hide.value)
+
+            }
+            // si el input tiene algo diferente guardar imagen
+            else {
+                // quitando la clase active de todas las imagenes
+                for (let img of list_img) {
+                    img.classList.remove("active")
+                }
+                // agregando la clase active a esta imagen
+                this.className += " active";
+
+                input_hide.value = this.src;
+            
+
+                console.log("the value of input_ hide is")
+                console.log(input_hide.value)
+
+                // VOY POR AQUI
+                list_img.forEach(item => console.log(item.classList));
+            }
         });
     }
 </script>

@@ -10,7 +10,7 @@
     transition-duration: 1s;
 }s
 
-.imagen:hover {
+.imagen .active {
     border-color: #af34ff;
     
 }
